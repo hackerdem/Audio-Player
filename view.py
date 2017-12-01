@@ -17,14 +17,14 @@ class View:
     
     def create_gui(self):
         self.root.title(AUDIO_PLAYER_NAME)
-        self.create_top_player()
+        self.create_top_display()
         self.create_button_frame()
-        self.create_list_box()
-        self.create_bottom_frame()
+        #self.create_list_box()
+        #self.create_bottom_frame()
         
     def create_top_display(self):
         frame=tk.Frame(self.root)
-        glass_frame_image=tk.PhotoImage(file='../icons/glass_frame.gif')
+        glass_frame_image=tk.PhotoImage(file='icons/glass_frame.gif')
         self.canvas=tk.Canvas(frame,width=370,height=90)
         self.canvas.image=glass_frame_image
         self.canvas.grid(row=1)
@@ -36,32 +36,98 @@ class View:
     
     def create_button_frame(self):
         frame=tk.Frame(self.root)
-        previous_track_icon=tk.PhotoImage(file='../icons/previos_track.gif')
+        previous_track_icon=tk.PhotoImage(file='icons/previous_track.gif')
         previous_track_button=tk.Button(frame,
                                         image=previous_track_icon,borderwidth=0,padx=0,command=self.on_previous_track_button_clicked)
         previous_track_button.image=previous_track_icon
         previous_track_button.grid(row=3,column=1,sticky='w')
-        rewind_icon=tk.PhotoImage(file='../icons/rewind.gif')
+        rewind_icon=tk.PhotoImage(file='icons/rewind.gif')
         rewind_button=tk.Button(frame,
                                 image=previous_track_icon,borderwidth=0,padx=0,command=self.on_rewind_button_clicked)
-        self.play_icon=tk.PhotoImage(file='../icons/play.gif')
-        self.play_icon=tk.PhotoImage(file='../icons/stop.gif')
+        self.play_icon=tk.PhotoImage(file='icons/play.gif')
+        self.play_icon=tk.PhotoImage(file='icons/stop.gif')
         self.play_stop_button=tk.Button(frame,
                                         image=self.play_icon,borderwidth=0,padx=0,command=self.on_play_stop_button_clicked)    
         self.play_stop_button.image=self.play_icon
         self.play_stop_button.grid(row=3,column=3)
         
-        self.pause_icon=tk.PhotoImage(file='../icons/pause.gif')
+        pause_icon=tk.PhotoImage(file='icons/pause.gif')
         pause_unpause_button=tk.Button(frame,
-                                       image=spause_icon,borderwidth=0,padx=0,command=self.on_pause_unpause_button_clicked)    
+                                       image=pause_icon,borderwidth=0,padx=0,command=self.on_pause_unpause_button_clicked)    
         pause_unpause_button.image=pause_icon
-        pause_unpause_button.grid(row=3,column=4)        
+        pause_unpause_button.grid(row=3,column=4)  
         
-
+        fast_forward_icon=tk.PhotoImage(file='icons/fast_forward.gif')
+        fast_forward_button=tk.Button(frame,
+                                       image=fast_forward_icon,borderwidth=0,padx=0,command=self.on_fast_forward_button_clicked)    
+        fast_forward_icon.image=pause_icon
+        fast_forward_button.grid(row=3,column=5)  
+        
+        next_track_icon=tk.PhotoImage(file='icons/next_track.gif')
+        next_track_button=tk.Button(frame,
+                                    image=next_track_icon,borderwidth=0,padx=0,command=self.on_next_track_button_clicked)    
+        fast_forward_icon.image=pause_icon
+        next_track_button.grid(row=3,column=6) 
+        
+        self.mute_icon=tk.PhotoImage(file='icons/mute.gif')
+        self.unmute_icon=tk.PhotoImage(file='icons/unmute.gif')
+        self.mute_unmute_button=tk.Button(frame,
+                                            image=self.unmute_icon,text='unmute',borderwidth=0,padx=0,command=self.on_mute_unmute_button_clicked)    
+        self.mute_unmute_icon=self.unmute_icon
+        self.mute_unmute_button.grid(row=3,column=7)   
+        
+        self.volume_scale=tkinter.ttk.Scale(frame,from_=0.0,to=1.0,command=self.on_volume_scale_changed)
+        self.volume_scale.set(0.6)
+        self.volume_scale.grid(row=3,column=8,padx=5)
+        
+        frame.grid(row=3,columnspan=5,sticky='w',pady=4,padx=5)
+        
+    def on_previous_track_button_clicked(self):
+        pass
+    
+    def on_rewind_button_clicked(self):
+        pass
+    
+    def on_play_stop_button_clicked(self):
+        pass
+    
+    def on_pause_unpause_button_clicked(self):
+        pass
+    
+    def on_mute_unmute_button_clicked(self):
+        pass
+    
+    def on_fast_forward_button_clicked(self):
+        pass
+    
+    def on_next_track_button_clicked(self):
+        pass
+    
+    def on_volume_scale_changed(self, value):
+        pass
+    
+    def on_add_file_button_clicked(self):
+        pass
+    
+    def on_remove_selected_button_clicked(self):
+        pass
+    
+    def on_add_directory_button_clicked(self):
+        pass
+    
+    def on_clear_play_list_button_clicked(self):
+        pass
+    
+    def on_remove_selected_context_menu_clicked(self):
+        pass
+    
+    def on_play_list_double_clicked(self, event=None):
+        pass        
+        
 if __name__=='__main__':
-    root=Tk()
+    root=tk.Tk()
     root.resizable(width=False,height=False)
-    player=player()
+    player=player.Player()
     model=model.Model()
     app=View(root,model,player)
     root.mainloop()
