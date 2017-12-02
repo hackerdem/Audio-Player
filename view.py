@@ -19,7 +19,7 @@ class View:
         self.root.title(AUDIO_PLAYER_NAME)
         self.create_top_display()
         self.create_button_frame()
-        #self.create_list_box()
+        self.create_list_box()
         #self.create_bottom_frame()
         
     def create_top_display(self):
@@ -81,7 +81,23 @@ class View:
         self.volume_scale.grid(row=3,column=8,padx=5)
         
         frame.grid(row=3,columnspan=5,sticky='w',pady=4,padx=5)
-        
+    def create_list_box(self):
+        frame=tk.Frame(self.root)
+        self.list_box=tk.Listbox(frame,activestyle='none',cursor='hand2',bg='#1C3D7D',fg='#A0B9E9',selectmode=tk.EXTENDED,height=10)
+        self.list_box.pack(side=tk.LEFT,fill=tk.BOTH,expand=1)
+        self.list_box.bind("<Double-Button-1>",self.on_play_list_double_clicked)
+        self.list_box.bind("<Button-3>",self.show_context_menu)
+        scroll_bar=tk.Scrollbar(frame)
+        scroll_bar.pack(side=tk.RIGHT,fill=tk.BOTH)
+        self.list_box.config(yscrollcommand=scroll_bar.set)
+        scroll_bar.config(command=self.list_box.yview)
+        frame.grid(row=4,padx=5,columnspan=10,sticky='ew')
+    
+    
+    def show_context_menu(self):
+        self.context_menu=tk.Menu(self.list_box,tearoff=0)
+        self.context_menu.add_command(label="Delete",command=self.on_remove_selected_context_menu_clicked)
+    
     def on_previous_track_button_clicked(self):
         pass
     
